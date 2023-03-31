@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+//主菜单按钮
+
 public class HomeButton : MonoBehaviour{
 	AsyncOperation operation;
 	IEnumerator loadScene(int index){ //异步加载场景

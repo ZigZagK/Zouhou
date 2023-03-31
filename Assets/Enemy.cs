@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour{
 				firedeltatime=Random.Range(0.5f,1f);
 			}
 			stoptimecount+=Time.deltaTime;
-			if (stoptimecount>stoptime){ //敌机开始撤退
+			if (!stop && stoptimecount>stoptime){ //敌机开始撤退
 				goalpos=new Vector3(transform.position.x,6,0);
 				reach=false;
 				stop=true;
@@ -54,7 +54,10 @@ public class Enemy : MonoBehaviour{
 		}
 	}
 	void Update(){
-		if (reach && stop) Destroy(gameObject); //敌机撤退完成，销毁敌机
+		if (reach && stop){
+			GlobalInfo.miss++; //未击毁敌机
+			Destroy(gameObject); //敌机撤退完成，销毁敌机
+		}
 		MoveTowards();
 		Fire();
 	}
@@ -62,7 +65,10 @@ public class Enemy : MonoBehaviour{
 		Bullet now=other.gameObject.GetComponent<Bullet>();
 		if (now!=null && now.type==0){ //子弹为自机子弹才判定击中
 			hp--;
-			if (hp<=0) Destroy(gameObject);
+			if (hp<=0){
+				GlobalInfo.score++; //击毁敌机
+				Destroy(gameObject);
+			}
 		}
 	}
 }

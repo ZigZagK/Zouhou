@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+//帮助按钮
+
 public class HelpButton : MonoBehaviour{
 	AsyncOperation operation;
 	IEnumerator loadScene(int index){ //异步加载场景

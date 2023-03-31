@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//自机移动脚本
+//自机脚本
 
 public class Player : MonoBehaviour{
 	public GameObject Bullet;
