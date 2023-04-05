@@ -9,8 +9,8 @@ public class Player : MonoBehaviour{
 	private GameObject checkpoint;
 	private float xmin,xmax,ymin,ymax; //屏幕边界
 	void Start(){
-		xmin=Game.xmin;xmax=Game.xmax;
-		ymin=Game.ymin;ymax=Game.ymax;
+		xmin=global.xmin;xmax=global.xmax;
+		ymin=global.ymin;ymax=global.ymax;
 		checkpoint=transform.GetChild(0).gameObject;
 		checkpoint.GetComponent<Renderer>().enabled=false;
 		checkpoint.SetActive(true);
@@ -46,18 +46,23 @@ public class Player : MonoBehaviour{
 			transform.position=LimitPosition(Vector3.Lerp(transform.position,pos,Time.deltaTime));
 		}
 	}
+	void ShootBullet(Vector3 pos,Vector3 forwards){ //发射子弹
+		GameObject bullet=Instantiate(Bullet,pos,Quaternion.identity);
+		SpriteRenderer sr=bullet.GetComponent<SpriteRenderer>();
+		sr.color=new Color(1,1,1,0.5f);
+		Bullet bulletcs=bullet.GetComponent<Bullet>();
+		bulletcs.speed=15;
+		bulletcs.movetowards=forwards;
+		bulletcs.xmin=xmin;bulletcs.xmax=xmax;
+		bulletcs.ymin=ymin;bulletcs.ymax=ymax;
+		bulletcs.type=0;
+	}
 	private float timecount=0;
 	private const float firedeltatime=0.05f; //子弹发射时间间隔
 	void Fire(){ //发射子弹
 		timecount+=Time.deltaTime;
 		if (Input.GetKey(KeyCode.Z) && timecount>firedeltatime){
-			GameObject bullet=Instantiate(Bullet,transform.position+Vector3.up*0.4f,Quaternion.identity);
-			Bullet bulletcs=bullet.GetComponent<Bullet>();
-			bulletcs.speed=15;
-			bulletcs.movetowards=Vector3.up;
-			bulletcs.xmin=xmin;bulletcs.xmax=xmax;
-			bulletcs.ymin=ymin;bulletcs.ymax=ymax;
-			bulletcs.type=0;
+			ShootBullet(transform.position+Vector3.up*0.4f,Vector3.up);
 			timecount=0;
 		}
 	}

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//退出按钮
+//退出游戏
 
-public class ExitButton : MonoBehaviour{
+public class Exit : MonoBehaviour{
 	public void ExitGame(){
 		Application.Quit();
 	}

@@ -1,6 +1,7 @@
 Library/
-.vscode/
 Temp/
-Assembly-CSharp.csproj
-Assembly-CSharp-Editor.csproj
-Zouhou.sln
+Logs/
+obj/
+.vscode/
+*.csproj
+*.sln
