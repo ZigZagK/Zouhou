@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour{
 	public GameObject Bullet;
+	public GameObject CircleBullet;
+	public GameObject Laser;
 	public int totalhp=10; //总血量
 	public int hp=10; //当前血量
 	public float speed=3; //飞行速度
@@ -17,7 +19,7 @@ public class Enemy : MonoBehaviour{
 		transform.position=Vector3.Lerp(transform.position,pos,Time.deltaTime);
 		if (Vector3.Distance(transform.position,goalpos)<0.1f) reach=true;
 	}
-	private float stoptimecount=0;
+	public float stoptimecount=0;
 	public float stoptime=5; //一定时间后敌机自行撤退
 	void Update(){
 		if (global.gameover) return; //游戏已经结束则不再继续判定

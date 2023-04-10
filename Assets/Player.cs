@@ -16,8 +16,8 @@ public class Player : MonoBehaviour{
 		checkpoint.SetActive(true);
 	}
 	Vector3 LimitPosition(Vector3 pos){ //阻止角色移动到屏幕外
-		float x=Mathf.Clamp(pos.x,xmin,xmax);
-		float y=Mathf.Clamp(pos.y,ymin,ymax);
+		float x=Mathf.Clamp(pos.x,xmin+0.1f,xmax-0.1f);
+		float y=Mathf.Clamp(pos.y,ymin+0.1f,ymax-0.1f);
 		return new Vector3(x,y,pos.z);
 	}
 	private const float highspeed=6f; //高速移动速度
@@ -31,28 +31,22 @@ public class Player : MonoBehaviour{
 		float v=highspeed;
 		if (Input.GetKey(KeyCode.LeftShift)) v=lowspeed;
 		//角色移动
-		if (Input.GetKey(KeyCode.LeftArrow)){
-			Vector3 pos=transform.position+Vector3.left*v;
-			transform.position=LimitPosition(Vector3.Lerp(transform.position,pos,Time.deltaTime));
-		} else if (Input.GetKey(KeyCode.RightArrow)){
-			Vector3 pos=transform.position+Vector3.right*v;
-			transform.position=LimitPosition(Vector3.Lerp(transform.position,pos,Time.deltaTime));
-		}
-		if (Input.GetKey(KeyCode.UpArrow)){
-			Vector3 pos=transform.position+Vector3.up*v;
-			transform.position=LimitPosition(Vector3.Lerp(transform.position,pos,Time.deltaTime));
-		} else if (Input.GetKey(KeyCode.DownArrow)){
-			Vector3 pos=transform.position+Vector3.down*v;
-			transform.position=LimitPosition(Vector3.Lerp(transform.position,pos,Time.deltaTime));
-		}
+		Vector3 forward=Vector3.zero;
+		if (Input.GetKey(KeyCode.LeftArrow)) forward.x=-1;
+		else if (Input.GetKey(KeyCode.RightArrow)) forward.x=1;
+		if (Input.GetKey(KeyCode.UpArrow)) forward.y=1;
+		else if (Input.GetKey(KeyCode.DownArrow)) forward.y=-1;
+		forward=forward.normalized;
+		Vector3 pos=transform.position+forward*v;
+		transform.position=LimitPosition(Vector3.Lerp(transform.position,pos,Time.deltaTime));
 	}
-	void ShootBullet(Vector3 pos,Vector3 forwards){ //发射子弹
+	void ShootBullet(Vector3 pos,Vector3 forward){ //发射子弹
 		GameObject bullet=Instantiate(Bullet,pos,Quaternion.identity);
 		SpriteRenderer sr=bullet.GetComponent<SpriteRenderer>();
 		sr.color=new Color(1,1,1,0.5f);
 		Bullet bulletcs=bullet.GetComponent<Bullet>();
 		bulletcs.speed=15;
-		bulletcs.movetowards=forwards;
+		bulletcs.movetowards=forward;
 		bulletcs.xmin=xmin;bulletcs.xmax=xmax;
 		bulletcs.ymin=ymin;bulletcs.ymax=ymax;
 		bulletcs.type=0;

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//符卡1 螺旋交叉弹 敌机脚本
+//符卡2 高低速自机狙 敌机脚本
 
-public class Boss1 : MonoBehaviour{
+public class Boss2 : MonoBehaviour{
 	private Enemy enemycs;
+	private GameObject player;
 	private float cardtime=60; //符卡时间
 	void Awake(){
 		enemycs=gameObject.GetComponent<Enemy>();
@@ -13,6 +14,9 @@ public class Boss1 : MonoBehaviour{
 		enemycs.goalpos=new Vector3(0,2,0);
 		enemycs.totalhp=enemycs.hp=250;
 		enemycs.stoptime=cardtime;
+	}
+	void Start(){
+		player=GameObject.FindWithTag("Player");
 	}
 	void ShootBullet(Vector3 pos,Vector3 forward,float speed,Color color){
 		GameObject bullet=Instantiate(enemycs.Bullet,pos,Quaternion.identity);
@@ -29,30 +33,28 @@ public class Boss1 : MonoBehaviour{
 		float sina=Mathf.Sin(angle),cosa=Mathf.Cos(angle);
 		return new Vector3(v.x*cosa-v.y*sina,v.x*sina+v.y*cosa);
 	}
-	//子弹分为快速弹和慢速弹
-	private Vector3 fastforward=Vector3.up;
-	private Color fastcolor=new Color32(104,212,255,255);
-	private Vector3 slowforward=Vector3.up;
-	private Color slowcolor=new Color32(255,175,7,255);
-	private float fasttimecount=0;
-	private float fastdeltatime=0.05f; //快速弹发射时间间隔
-	private float slowtimecount=0;
-	private float slowdeltatime=0.075f; //慢速弹发射时间间隔
+	float Forward(Vector3 a){ //a向量的朝向角度
+		return Mathf.Atan2(a.y,a.x);
+	}
+	private Color color1=new Color32(104,212,255,255);
+	private Color color2=new Color32(255,175,7,255);
+	private Color color3=Color.green;
+	private float timecount=0;
+	private float deltatime=0.1f;
 	void Fire(){ //发射子弹
+		if (player==null) return; //玩家已消失则停止发射子弹
 		if (enemycs.reach){ //到达位置后开始发射子弹
-			fasttimecount+=Time.deltaTime;
-			if (fasttimecount>fastdeltatime){
-				for (int i=0;i<8;i++)
-					ShootBullet(transform.position,Rotate(fastforward,Mathf.PI*i/4),4f,fastcolor);
-				fastforward=Rotate(fastforward,0.15f);
-				fasttimecount=0;
-			}
-			slowtimecount+=Time.deltaTime;
-			if (slowtimecount>slowdeltatime){
-				for (int i=0;i<4;i++)
-					ShootBullet(transform.position,Rotate(slowforward,Mathf.PI*i/2),2f,slowcolor);
-				slowforward=Rotate(slowforward,-0.25f);
-				slowtimecount=0;
+			timecount+=Time.deltaTime;
+			if (timecount>deltatime){
+				float angle=Forward(player.transform.position-transform.position);
+				Vector3 forward=new Vector3(Mathf.Cos(angle),Mathf.Sin(angle),0);
+				for (int i=0;i<16;i++){
+					Vector3 nowforward=Rotate(forward,Mathf.PI*i/8);
+					float speed=Random.Range(2f,8f);
+					Color nowcolor=(speed<=3?color1:(speed<=5?color2:color3));
+					ShootBullet(transform.position,nowforward,speed,nowcolor);
+				}
+				timecount=0;
 			}
 		}
 	}

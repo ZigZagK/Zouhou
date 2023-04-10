@@ -20,13 +20,13 @@ public class RandomEnemy : MonoBehaviour{
 	}
 	private float firetimecount=0;
 	private float firedeltatime=0f; //子弹发射时间间隔
-	void ShootBullet(Vector3 pos,Vector3 forwards){
+	void ShootBullet(Vector3 pos,Vector3 forward){
 		GameObject bullet=Instantiate(enemycs.Bullet,pos,Quaternion.identity);
 		SpriteRenderer sr=bullet.GetComponent<SpriteRenderer>();
 		sr.color=Color.green;
 		Bullet bulletcs=bullet.GetComponent<Bullet>();
 		bulletcs.speed=Random.Range(2f,5f);
-		bulletcs.movetowards=forwards;
+		bulletcs.movetowards=forward;
 		bulletcs.xmin=global.xmin;bulletcs.xmax=global.xmax;
 		bulletcs.ymin=global.ymin;bulletcs.ymax=global.ymax;
 		bulletcs.type=1;

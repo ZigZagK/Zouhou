@@ -19,7 +19,6 @@ public class SpellCard : MonoBehaviour{
 		global.GlobalInfoInit();
 		Text=TimeText.GetComponent<TextMeshProUGUI>();
 		HP=HPBar.GetComponent<RectTransform>();
-		global.bossname="Boss1"; //Debug
 	}
 	void Start(){ //创建Boss敌机
 		enemy=Instantiate(Enemy,new Vector3(0,5,0),Quaternion.identity);
