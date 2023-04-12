@@ -12,6 +12,8 @@ public class global{
 	public static int miss=0; //未击毁敌机数
 	public static float survival_time=0; //存活时间
 	public static string bossname; //符卡模式下，Boss的名称
+	public static int subtype=0; //子机种类名称
+	public static string subname; //子机种类名称
 	public static bool gameover=false; //游戏是否已经结束
 	public static void GlobalInfoInit(){ //全局信息初始化
 		//获取画面边界

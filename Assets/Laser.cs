@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour{
 	public LineRenderer line;
-	public BoxCollider2D bc;
+	private BoxCollider2D bc;
 	void Awake(){
 		line=gameObject.GetComponent<LineRenderer>();
 		bc=gameObject.GetComponent<BoxCollider2D>();
@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour{
 		bc.transform.position=(S+T)/2f;
 		bc.size=new Vector2(Vector2.Distance(S,T),line.startWidth);
 	}
-	public void SetLaser(Vector3 S,Vector3 T){
+	public void SetLaser(Vector2 S,Vector2 T){
 		line.SetPosition(0,S);
 		line.SetPosition(1,T);
 		UpdateBox(S,T);

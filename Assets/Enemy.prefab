@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: -650275656529507207}
   - component: {fileID: -2090899389592542973}
   - component: {fileID: -728081605049741226}
+  - component: {fileID: -8932081509669404150}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,9 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec56c3f7f26252478f8dce5ced92b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 5256071503840639174, guid: 8d85ea330d7f53b4aa8145cd21ec66de, type: 3}
-  CircleBullet: {fileID: 3103186908640580253, guid: f24250402f60b3b44adc9a943c36dfa0, type: 3}
-  Laser: {fileID: 4871353721728476538, guid: e43caab2bb32c5c4eaf24ebb5df6196f, type: 3}
   totalhp: 10
   hp: 10
   speed: 3
@@ -157,3 +155,18 @@ MonoBehaviour:
   stop: 0
   stoptimecount: 0
   stoptime: 5
+--- !u!114 &-8932081509669404150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605481820584881912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd081fbe2514e8b4481f674e32b490fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 5256071503840639174, guid: 8d85ea330d7f53b4aa8145cd21ec66de, type: 3}
+  CircleBullet: {fileID: 3103186908640580253, guid: f24250402f60b3b44adc9a943c36dfa0, type: 3}
+  Laser: {fileID: 4871353721728476538, guid: e43caab2bb32c5c4eaf24ebb5df6196f, type: 3}

@@ -6,30 +6,31 @@ using UnityEngine;
 
 public class RandomEnemy : MonoBehaviour{
 	private Enemy enemycs;
+	private BulletSet bs;
 	void Awake(){
 		enemycs=gameObject.GetComponent<Enemy>();
+		bs=gameObject.GetComponent<BulletSet>();
 	}
-	float Forward(Vector3 a){ //a向量的朝向角度
+	float Forward(Vector2 a){ //a向量的朝向角度
 		return Mathf.Atan2(a.y,a.x);
 	}
-	Vector3 RandomDirection(){ //随机角度发射
+	Vector2 RandomDirection(){ //随机角度发射
 		float L=Forward(new Vector3(global.xmin,global.ymin,0)-transform.position);
 		float R=Forward(new Vector3(global.xmax,global.ymin,0)-transform.position);
 		float angle=Random.Range(L,R);
-		return new Vector3(Mathf.Cos(angle),Mathf.Sin(angle),0);
+		return new Vector2(Mathf.Cos(angle),Mathf.Sin(angle));
 	}
 	private float firetimecount=0;
 	private float firedeltatime=0f; //子弹发射时间间隔
-	void ShootBullet(Vector3 pos,Vector3 forward){
-		GameObject bullet=Instantiate(enemycs.Bullet,pos,Quaternion.identity);
+	void ShootBullet(Vector2 pos,Vector2 forward){
+		GameObject bullet=Instantiate(bs.Bullet,pos,Quaternion.identity);
 		SpriteRenderer sr=bullet.GetComponent<SpriteRenderer>();
 		sr.color=Color.green;
-		Bullet bulletcs=bullet.GetComponent<Bullet>();
+		StraightBullet bulletcs=bullet.AddComponent<StraightBullet>();
 		bulletcs.speed=Random.Range(2f,5f);
 		bulletcs.movetowards=forward;
 		bulletcs.xmin=global.xmin;bulletcs.xmax=global.xmax;
 		bulletcs.ymin=global.ymin;bulletcs.ymax=global.ymax;
-		bulletcs.type=1;
 	}
 	void Fire(){ //发射子弹
 		if (enemycs.reach){ //到达位置后开始发射子弹

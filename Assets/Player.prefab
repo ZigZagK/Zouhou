@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1578224896661317622}
   - component: {fileID: 1578224896661317617}
   - component: {fileID: 1578224896661317616}
+  - component: {fileID: -2495496831499731573}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -98,7 +99,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0f7a184a7e8254c9af5ab5c78cc55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Subplane: {fileID: 2940965110947864081, guid: 64e18e4a375657d47954fd64b2a82e6d, type: 3}
+--- !u!114 &-2495496831499731573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578224896661317619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd081fbe2514e8b4481f674e32b490fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   Bullet: {fileID: 5256071503840639174, guid: 8d85ea330d7f53b4aa8145cd21ec66de, type: 3}
+  CircleBullet: {fileID: 3103186908640580253, guid: f24250402f60b3b44adc9a943c36dfa0, type: 3}
+  Laser: {fileID: 4871353721728476538, guid: e43caab2bb32c5c4eaf24ebb5df6196f, type: 3}
 --- !u!1 &1578224898677515026
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,33 +6,34 @@ using UnityEngine;
 
 public class Boss1 : MonoBehaviour{
 	private Enemy enemycs;
+	private BulletSet bs;
 	private float cardtime=60; //符卡时间
 	void Awake(){
 		enemycs=gameObject.GetComponent<Enemy>();
-		transform.position=new Vector3(0,5,0);
-		enemycs.goalpos=new Vector3(0,2,0);
-		enemycs.totalhp=enemycs.hp=250;
+		transform.position=new Vector2(0,5);
+		enemycs.goalpos=new Vector2(0,2);
+		enemycs.totalhp=enemycs.hp=300;
 		enemycs.stoptime=cardtime;
+		bs=gameObject.GetComponent<BulletSet>();
 	}
-	void ShootBullet(Vector3 pos,Vector3 forward,float speed,Color color){
-		GameObject bullet=Instantiate(enemycs.Bullet,pos,Quaternion.identity);
+	void ShootBullet(Vector2 pos,Vector2 forward,float speed,Color color){
+		GameObject bullet=Instantiate(bs.Bullet,pos,Quaternion.identity);
 		SpriteRenderer sr=bullet.GetComponent<SpriteRenderer>();
 		sr.color=color;
-		Bullet bulletcs=bullet.GetComponent<Bullet>();
+		StraightBullet bulletcs=bullet.AddComponent<StraightBullet>();
 		bulletcs.speed=speed;
 		bulletcs.movetowards=forward;
 		bulletcs.xmin=global.xmin;bulletcs.xmax=global.xmax;
 		bulletcs.ymin=global.ymin;bulletcs.ymax=global.ymax;
-		bulletcs.type=1;
 	}
-	Vector3 Rotate(Vector3 v,float angle){ //向量v逆时针旋转angle
+	Vector2 Rotate(Vector2 v,float angle){ //向量v逆时针旋转angle
 		float sina=Mathf.Sin(angle),cosa=Mathf.Cos(angle);
-		return new Vector3(v.x*cosa-v.y*sina,v.x*sina+v.y*cosa);
+		return new Vector2(v.x*cosa-v.y*sina,v.x*sina+v.y*cosa);
 	}
 	//子弹分为快速弹和慢速弹
-	private Vector3 fastforward=Vector3.up;
+	private Vector2 fastforward=Vector2.up;
 	private Color fastcolor=new Color32(104,212,255,255);
-	private Vector3 slowforward=Vector3.up;
+	private Vector2 slowforward=Vector2.up;
 	private Color slowcolor=new Color32(255,175,7,255);
 	private float fasttimecount=0;
 	private float fastdeltatime=0.05f; //快速弹发射时间间隔

@@ -21,7 +21,7 @@ public class SpellCard : MonoBehaviour{
 		HP=HPBar.GetComponent<RectTransform>();
 	}
 	void Start(){ //创建Boss敌机
-		enemy=Instantiate(Enemy,new Vector3(0,5,0),Quaternion.identity);
+		enemy=Instantiate(Enemy,new Vector2(0,5),Quaternion.identity);
 		enemy.AddComponent(Type.GetType(global.bossname));
 		enemycs=enemy.GetComponent<Enemy>();
 		cardtime=enemycs.stoptime;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 208941629644908700}
   - component: {fileID: 3603659075286133819}
   - component: {fileID: 4526614601449934127}
-  - component: {fileID: -1567452514088690755}
+  - component: {fileID: 4445855690528172513}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &-1567452514088690755
+--- !u!114 &4445855690528172513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,10 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffa5e7f33472ec44806a7b68ec99680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xmin: 0
-  xmax: 0
-  ymin: 0
-  ymax: 0
-  speed: 0
-  movetowards: {x: 0, y: 0, z: 0}
-  type: 0
+  type: 1
+  damage: 1
